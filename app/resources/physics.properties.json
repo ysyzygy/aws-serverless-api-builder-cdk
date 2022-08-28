@@ -1,0 +1,66 @@
+{
+// other properties
+  "api_gateway": {
+    "stack_name": "apigateway-stack",
+    "description": "Api Gateway description",
+    "api_rest_name": "api-rest",
+    "deployment_name": "deployment",
+    "stage_name": "dev",
+    "api_rest_description": "Api Rest description",
+    "integrations": [
+      {
+        "name": "createResource",
+        "name_func": "create_resource",
+        "base_resource": "resources",
+        "method": "PUT",
+        "optional_resources": [
+          "{resourceId}"
+        ],
+        "lambda": {
+          "lambda_stack_name": "lambda-create-resource",
+          "description": "Create resource Lambda stack description",
+          "cpu": 256,
+          "name": "create-resource",
+          "code_from_asset": "stacks/apigateway/integrations",
+          "handler": "create_resource.lambda_handler",
+          "timeout": 1,
+          "execution_role": "lambda-create-resource-role",
+          "policy_name": "lambda-create-resource-policy",
+          "policy_statements": [
+            "dynamodb:PutItem"
+          ]
+        }
+      },
+      {
+        "name": "deleteResource",
+        "name_func": "delete_resource",
+        "base_resource": "resources/{resourceId}",
+        "method": "DELETE",
+        "optional_resources": [
+
+        ],
+        "lambda": {
+          "lambda_stack_name": "lambda-delete-resource",
+          "description": "Delete resource Lambda stack description",
+          "cpu": 256,
+          "name": "delete-resource",
+          "code_from_asset": "stacks/apigateway/integrations",
+          "handler": "delete_resource.lambda_handler",
+          "timeout": 1,
+          "execution_role": "lambda-delete-resource-role",
+          "policy_name": "lambda-delete-resource-policy",
+          "policy_statements": [
+            "dynamodb:GetItem",
+            "dynamodb:DeleteItem"
+          ]
+        },
+//      {
+//        add new integrations
+//      }
+      }
+    ],
+    "role_name": "apigateway-role",
+    "truststore_path": "resources/cert.crt",
+    "mutual_tls": "true"
+  }
+}
