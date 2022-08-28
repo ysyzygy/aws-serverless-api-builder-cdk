@@ -1,5 +1,5 @@
 
-# Welcome to your CDK VR Python project!
+# Welcome to your CDK Python project!
 
 
 ## AWS CDK
