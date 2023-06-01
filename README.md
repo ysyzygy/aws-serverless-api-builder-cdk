@@ -1,5 +1,5 @@
 
-# Welcome to AWS CDK Python project!
+# AWS Serverless API Builder with AWS CDK
 
 ## Intro
 
