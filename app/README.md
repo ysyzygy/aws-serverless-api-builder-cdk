@@ -1,5 +1,5 @@
 
-# Welcome to your CDK Python project!
+# How to create a AWS API Gateway with Lambda integration with AWS CDK with Python.
 
 
 ## AWS CDK
